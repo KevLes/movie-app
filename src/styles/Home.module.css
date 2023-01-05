@@ -1,0 +1,18 @@
+.searchContainer {
+    display: flex;
+    width: 100%;
+    max-width: 1440px;
+    justify-content: center;
+    margin: 100px auto;
+}
+
+.movieList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 0 40px;
+}
+
+.movieList .movieCard {
+    width: 25%;
+}
