@@ -1,19 +1,20 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import styles from '../styles/Home.module.css'
+import styles from "../styles/Home.module.css";
 
 const MovieList = () => {
   const [movies, setMovies] = useState<Array<any>>();
   const [searchTerm, setSearchTerm] = useState("");
+  const [typeFilter, setTypeFilter] = useState("");
   useEffect(() => {
     if (searchTerm.length > 3) {
       fetchAllMovies(searchTerm);
     }
-  }, [searchTerm]);
+  }, [searchTerm, typeFilter]);
 
   const fetchAllMovies = async (searchTerm: string) => {
     const response = await fetch(
-      `http://www.omdbapi.com/?apikey=72e2b6a0&s=${searchTerm}`
+      `http://www.omdbapi.com/?apikey=72e2b6a0&s=${searchTerm}&type=${typeFilter}`
     );
     const data = await response.json();
     setMovies(data.Search);
@@ -24,28 +25,38 @@ const MovieList = () => {
     <div>
       <div className={styles.searchContainer}>
         <input
+          className={styles.searchBar}
           value={searchTerm}
+          placeholder="Search..."
           onChange={(e) => setSearchTerm(e.target.value)}
         />
+        <select className={styles.selectFilter} onChange={(e) => setTypeFilter(e.target.value)}>
+          <option value=" ">Choose type</option>
+          <option value=" ">All</option>
+          <option value="movie">Movies</option>
+          <option value="series">Series</option>
+        </select>
       </div>
-      <div className={styles.movieList}>
-        {movies &&
-          movies.map((movie: any) => {
-            return (
-              <div className={styles.movieCard} key={movie.imdbID}>
-                {movie.Poster !== "N/A" && (
-                  <Image
-                    src={`${movie.Poster}`}
-                    alt={movie.Title}
-                    width={300}
-                    height={468}
-                  />
-                )}
-                <h2>{movie.Title}</h2>
-                <p>{movie.Year}</p>
-              </div>
-            );
-          })}
+      <div className={styles.movieListContainer}>
+        <div className={styles.movieList}>
+          {movies &&
+            movies.map((movie: any) => {
+              return (
+                <div className={styles.movieCard} key={movie.imdbID}>
+                  {movie.Poster !== "N/A" && (
+                    <Image
+                      src={`${movie.Poster}`}
+                      alt={movie.Title}
+                      width={300}
+                      height={468}
+                    />
+                  )}
+                  <h3>{movie.Title}</h3>
+                  <p>{movie.Year}</p>
+                </div>
+              );
+            })}
+        </div>
       </div>
     </div>
   );
