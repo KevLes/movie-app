@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
 
@@ -48,10 +49,10 @@ const MovieList = () => {
                       src={`${movie.Poster}`}
                       alt={movie.Title}
                       width={300}
-                      height={468}
+                      height={443}
                     />
                   )}
-                  <h3>{movie.Title}</h3>
+                  <h3><Link href={`/title/${movie.imdbID}`}>{movie.Title}</Link></h3>
                   <p>{movie.Year}</p>
                 </div>
               );
