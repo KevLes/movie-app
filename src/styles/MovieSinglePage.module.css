@@ -19,6 +19,10 @@
     display: flex;
 }
 
+.headerListInfo li img {
+    vertical-align: top;
+}
+
 .headerListInfo li {
     padding: 5px;
     border: 1px solid #2970a9;
@@ -34,5 +38,27 @@
 }
 
 .movieDetails {
+    margin-top: 40px;
+}
 
+.movieDetails span {
+    margin-right: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: #b1dbff;
+
+}
+
+.movieDetails p {
+    margin: 15px 0;
+    font-weight: 300;
+    color: #fff;
+}
+
+.movieDetails p:first-of-type {
+    margin-top: 0;
+    border-bottom: 2px solid #6b8ca6;
+    padding-bottom: 15px;
+    font-weight: 400;
+    color: #fff;
 }

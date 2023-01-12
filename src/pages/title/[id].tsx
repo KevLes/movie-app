@@ -37,6 +37,11 @@ const MovieInfoPage = () => {
     setMovieInfo(data);
   };
 
+  const splitAndJoinStrings = (value: string) => {
+    const splitedValue = value.split(",");
+    return splitedValue.join(" | ");
+  }
+
   return (
     movieInfo && (
       <div>
@@ -57,14 +62,14 @@ const MovieInfoPage = () => {
                 <li>{movieInfo.Year}</li>
                 <li>{movieInfo.Rated}</li>
                 <li>{movieInfo.Runtime}</li>
-                <li>{movieInfo.imdbRating}/10</li>
+                <li>{movieInfo.imdbRating}/10 <Image src="/star.png" width={18} height={18} alt="IMDd rating" /></li>
               </ul>
             </div>
             <div className={styles.movieDetails}>
               <p>{movieInfo.Plot}</p>
-              <p>Director: {movieInfo.Director}</p>
-              <p>Writers: {movieInfo.Writer}</p>
-              <p>Actors: {movieInfo.Actors}</p>
+              <p><span>Director</span> {movieInfo.Director}</p>
+              <p><span>Writers</span> {splitAndJoinStrings(movieInfo.Writer)}</p>
+              <p><span>Actors</span> {splitAndJoinStrings(movieInfo.Actors)}</p>
             </div>
           </div>
         </div>

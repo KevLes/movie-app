@@ -12,8 +12,9 @@ html {
 html,
 body {
   max-width: 100vw;
+  height: 100vh;
   overflow-x: hidden;
-  background-color: #172129;
+  background-image: linear-gradient(45deg, #172129, #131f29db, #022541e8);
   color: #fff;
 }
 
