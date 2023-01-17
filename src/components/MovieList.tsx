@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 import styles from "../styles/Home.module.css";
+import paginationStyles from "../styles/Pagination.module.css";
 
 const MovieList = () => {
   const [movies, setMovies] = useState<Array<any>>();
+  const [searchResults, setSearchResults] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,15 +18,19 @@ const MovieList = () => {
   }, [searchTerm, typeFilter, currentPage]);
 
   console.log(currentPage);
-  
 
   const fetchAllMovies = async (searchTerm: string) => {
     const response = await fetch(
       `http://www.omdbapi.com/?apikey=72e2b6a0&s=${searchTerm}&type=${typeFilter}&page=${currentPage}`
     );
     const data = await response.json();
+    setSearchResults(data.totalResults);
     setMovies(data.Search);
     console.log(data);
+  };
+
+  const paginate = (event: any) => {
+    setCurrentPage(event.selected + 1);
   };
 
   return (
@@ -67,11 +74,19 @@ const MovieList = () => {
               );
             })}
         </div>
-        {movies && (
-          <div>
-            {currentPage !== 1 && <button onClick={() => setCurrentPage(currentPage - 1)}>Back</button>}
-            {movies?.length === 10 && <button onClick={() => setCurrentPage(currentPage + 1)}>Next</button>}
-          </div>
+        {searchResults && (
+            <ReactPaginate
+              onPageChange={paginate}
+              pageCount={Math.ceil(parseInt(searchResults) / 10)}
+              previousLabel={"Prev"}
+              nextLabel={"Next"}
+              pageRangeDisplayed={5}
+              containerClassName={paginationStyles.pagination}
+              pageLinkClassName={"page-number"}
+              previousLinkClassName={"page-number"}
+              nextLinkClassName={"page-number"}
+              activeLinkClassName={paginationStyles.active}
+            />
         )}
       </div>
     </div>
