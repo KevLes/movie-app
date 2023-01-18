@@ -57,36 +57,37 @@ const MovieList = () => {
           {movies &&
             movies.map((movie: any) => {
               return (
-                <div className={styles.movieCard} key={movie.imdbID}>
-                  {movie.Poster !== "N/A" && (
-                    <Image
-                      src={`${movie.Poster}`}
-                      alt={movie.Title}
-                      width={300}
-                      height={443}
-                    />
-                  )}
-                  <h3>
-                    <Link href={`/title/${movie.imdbID}`}>{movie.Title}</Link>
-                  </h3>
-                  <p>{movie.Year}</p>
-                </div>
+                <Link href={`/title/${movie.imdbID}`} key={movie.imdbID}>
+                  <div className={styles.movieCard}>
+                    {movie.Poster !== "N/A" && (
+                      <Image
+                        src={`${movie.Poster}`}
+                        alt={movie.Title}
+                        width={300}
+                        height={443}
+                      />
+                    )}
+                    <h3>{movie.Title}</h3>
+                    <p>{movie.Year}</p>
+                  </div>
+                </Link>
               );
             })}
         </div>
         {searchResults && (
-            <ReactPaginate
-              onPageChange={paginate}
-              pageCount={Math.ceil(parseInt(searchResults) / 10)}
-              previousLabel={"Prev"}
-              nextLabel={"Next"}
-              pageRangeDisplayed={5}
-              containerClassName={paginationStyles.pagination}
-              pageLinkClassName={"page-number"}
-              previousLinkClassName={"page-number"}
-              nextLinkClassName={"page-number"}
-              activeLinkClassName={paginationStyles.active}
-            />
+          <ReactPaginate
+            onPageChange={paginate}
+            pageCount={Math.ceil(parseInt(searchResults) / 10)}
+            previousLabel={"Prev"}
+            nextLabel={"Next"}
+            pageRangeDisplayed={5}
+            containerClassName={paginationStyles.pagination}
+            pageClassName={paginationStyles.pageListItem}
+            pageLinkClassName={paginationStyles.pageLink}
+            previousLinkClassName={paginationStyles.prevButton}
+            nextLinkClassName={paginationStyles.nextButton}
+            activeLinkClassName={paginationStyles.activePageLink}
+          />
         )}
       </div>
     </div>
