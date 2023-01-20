@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import styles from "../../styles/MovieSinglePage.module.css";
+import styles from "../../styles/modules/MovieSinglePage.module.css";
 import Image from "next/image";
 
 interface MovieInfoProps {
@@ -40,20 +40,22 @@ const MovieInfoPage = () => {
   const splitAndJoinStrings = (value: string) => {
     const splitedValue = value.split(",");
     return splitedValue.join(" | ");
-  }
+  };
 
   return (
     movieInfo && (
       <div>
-        <Link href="/">Go back</Link>
         <div className={styles.movieDetailsWrapper}>
           {movieInfo.Poster !== "N/A" && (
-            <Image
-              src={`${movieInfo.Poster}`}
-              alt={movieInfo.Title}
-              width={300}
-              height={443}
-            />
+            <div className={styles.imageContainer}>
+              <Link className={styles.backButton} href="/">Go back</Link>
+              <Image
+                src={`${movieInfo.Poster}`}
+                alt={movieInfo.Title}
+                width={300}
+                height={443}
+              />
+            </div>
           )}
           <div className={styles.movieDetailsContainer}>
             <div className={styles.movieDetailsHeader}>
@@ -62,14 +64,28 @@ const MovieInfoPage = () => {
                 <li>{movieInfo.Year}</li>
                 <li>{movieInfo.Rated}</li>
                 <li>{movieInfo.Runtime}</li>
-                <li>{movieInfo.imdbRating}/10 <Image src="/star.png" width={18} height={18} alt="IMDd rating" /></li>
+                <li>
+                  {movieInfo.imdbRating}/10{" "}
+                  <Image
+                    src="/star.png"
+                    width={18}
+                    height={18}
+                    alt="IMDd rating"
+                  />
+                </li>
               </ul>
             </div>
             <div className={styles.movieDetails}>
               <p>{movieInfo.Plot}</p>
-              <p><span>Director</span> {movieInfo.Director}</p>
-              <p><span>Writers</span> {splitAndJoinStrings(movieInfo.Writer)}</p>
-              <p><span>Actors</span> {splitAndJoinStrings(movieInfo.Actors)}</p>
+              <p>
+                <span>Director</span> {movieInfo.Director}
+              </p>
+              <p>
+                <span>Writers</span> {splitAndJoinStrings(movieInfo.Writer)}
+              </p>
+              <p>
+                <span>Actors</span> {splitAndJoinStrings(movieInfo.Actors)}
+              </p>
             </div>
           </div>
         </div>

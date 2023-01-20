@@ -29,6 +29,14 @@
   font-family: "Poppins", sans-serif;
 }
 
+.introContainer h1, .introContainer h2 {
+  color: #b1dbf9;
+}
+
+.introContainer h1 {
+  margin-bottom: 20px;
+}
+
 .movieListContainer {
   display: flex;
   flex-direction: column;

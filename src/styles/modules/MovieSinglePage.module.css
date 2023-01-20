@@ -4,6 +4,7 @@
     margin: 80px auto;
     width: 100%;
     justify-content: center;
+    align-items: center;
 }
 
 .movieDetailsContainer {
@@ -11,8 +12,9 @@
     margin-left: 50px;
 }
 
-.movieDetailsHeader {
-
+.imageContainer {
+    display: flex;
+    flex-direction: column;
 }
 
 .headerListInfo {

@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-import styles from "../styles/Home.module.css";
-import paginationStyles from "../styles/Pagination.module.css";
+import styles from "../styles/modules/Home.module.css";
+import paginationStyles from "../styles/modules/Pagination.module.css";
 
 const MovieList = () => {
   const [movies, setMovies] = useState<Array<any>>();
@@ -53,6 +53,18 @@ const MovieList = () => {
         </select>
       </div>
       <div className={styles.movieListContainer}>
+        {!movies && (
+          <div className={styles.introContainer}>
+            <h1>
+              Welcome to the source of all things movie and series related
+            </h1>
+            <h2>
+              Go ahead and search for a movie or series.
+              <br /> You can also filter between showing movies, series or both.
+            </h2>
+          </div>
+        )}
+
         <div className={styles.movieList}>
           {movies &&
             movies.map((movie: any) => {
@@ -74,6 +86,7 @@ const MovieList = () => {
               );
             })}
         </div>
+
         {searchResults && (
           <ReactPaginate
             onPageChange={paginate}
