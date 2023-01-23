@@ -4,6 +4,7 @@
   max-width: 1440px;
   justify-content: center;
   margin: 100px auto;
+  padding: 0 40px;
 }
 
 .searchBar {
@@ -29,7 +30,8 @@
   font-family: "Poppins", sans-serif;
 }
 
-.introContainer h1, .introContainer h2 {
+.introContainer h1,
+.introContainer h2 {
   color: #b1dbf9;
 }
 
@@ -41,24 +43,38 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 40px;
+}
+
+.searchResultText {
+  align-self: flex-start;
+  margin-bottom: 15px;
 }
 
 .movieList {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 0 40px;
 }
 
 .movieCard {
   width: auto;
   height: auto;
-  padding: 0 10px;
   margin: 10px 0;
+  transition: transform 250ms;
+}
+
+.movieCard:hover {
+  transform: translateY(-8px);
 }
 
 .movieCard h3 {
   max-width: 300px;
+}
+
+.movieCardLink:hover h3 {
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .movieCard img {
@@ -67,4 +83,9 @@
   margin-bottom: 10px;
   border-radius: 12px;
   box-shadow: 2px 2px 12px 5px #0f161d;
+  transition: box-shadow 250ms;
+}
+
+.movieCard:hover > img {
+  box-shadow: 3px 12px 12px 12px #0f161d;
 }

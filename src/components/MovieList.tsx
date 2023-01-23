@@ -11,13 +11,14 @@ const MovieList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [errorMessage, setErrorMessage] = useState("");
   useEffect(() => {
     if (searchTerm.length > 3) {
       fetchAllMovies(searchTerm);
     }
-  }, [searchTerm, typeFilter, currentPage]);
 
-  console.log(currentPage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchTerm, typeFilter, currentPage]);
 
   const fetchAllMovies = async (searchTerm: string) => {
     const response = await fetch(
@@ -26,7 +27,7 @@ const MovieList = () => {
     const data = await response.json();
     setSearchResults(data.totalResults);
     setMovies(data.Search);
-    console.log(data);
+    setErrorMessage(data.Error);
   };
 
   const paginate = (event: any) => {
@@ -46,14 +47,19 @@ const MovieList = () => {
           className={styles.selectFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
         >
-          <option value=" ">Choose type</option>
-          <option value=" ">All</option>
+          <option value="">Choose type</option>
+          <option value="">All</option>
           <option value="movie">Movies</option>
           <option value="series">Series</option>
         </select>
       </div>
       <div className={styles.movieListContainer}>
-        {!movies && (
+        {searchResults && (
+          <h2 className={styles.searchResultText}>{searchResults} Results</h2>
+        )}
+        {errorMessage === "Movie not found!" ? (
+          <h2>No results could be found for &apos;{searchTerm}&apos;</h2>
+        ) : !movies && searchTerm.length === 0 ? (
           <div className={styles.introContainer}>
             <h1>
               Welcome to the source of all things movie and series related
@@ -63,13 +69,17 @@ const MovieList = () => {
               <br /> You can also filter between showing movies, series or both.
             </h2>
           </div>
-        )}
+        ) : null}
 
         <div className={styles.movieList}>
           {movies &&
             movies.map((movie: any) => {
               return (
-                <Link href={`/title/${movie.imdbID}`} key={movie.imdbID}>
+                <Link
+                  className={styles.movieCardLink}
+                  href={`/title/${movie.imdbID}`}
+                  key={movie.imdbID}
+                >
                   <div className={styles.movieCard}>
                     {movie.Poster !== "N/A" && (
                       <Image

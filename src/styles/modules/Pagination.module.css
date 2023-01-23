@@ -1,33 +1,47 @@
 .pagination {
-    display: flex;
-    justify-content: center;
-    margin: 40px 0;
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
 }
-.pagination .pageListItem{
-    list-style: none;
-  }
-  .pagination .pageLink {
-    padding: 8px 20px;
-    line-height: 1.5;
-    border-radius: 8px;
-    font-size: 18px;
-    cursor: pointer;
-  }
-  
-  .pagination .activePageLink:hover {
-    background-color: #527289;
-    color: white;
-    cursor: pointer;
-  }
-  .pagination > li:first-child > .activePageLink,
-  .pagination > li:first-child > span {
-    margin-left: 0;
-  }
 
-  .pagination .activePageLink {border: 1px solid #527289;}
+.pagination .pageListItem {
+  list-style: none;
+}
 
-  .pagination .prevButton, .pagination .nextButton {
-    margin: 0 10px;
-    font-size: 18px;
-    cursor: pointer;
-  }
+.pagination .pageLink {
+  padding: 8px 20px;
+  line-height: 1.5;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.pagination .pageLink:hover {
+  border: 1px solid #527289;
+}
+
+.pagination .activePageLink:hover {
+  background-color: #527289;
+  color: white;
+  cursor: pointer;
+}
+
+.pagination > li:first-child > .activePageLink,
+.pagination > li:first-child > span {
+  margin-left: 0;
+}
+
+.pagination .activePageLink {
+  border: 1px solid #527289;
+}
+
+.pagination .prevButton,
+.pagination .nextButton {
+  margin: 0 10px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.pagination .prevButton:hover,
+.pagination .nextButton:hover {
+  text-decoration: underline;
+}
