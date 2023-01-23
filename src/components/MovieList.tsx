@@ -21,7 +21,7 @@ const MovieList = () => {
 
   const fetchAllMovies = async (searchTerm: string) => {
     const response = await fetch(
-      `http://www.omdbapi.com/?apikey=72e2b6a0&s=${searchTerm}&type=${typeFilter}&page=${currentPage}`
+      `https://www.omdbapi.com/?apikey=72e2b6a0&s=${searchTerm}&type=${typeFilter}&page=${currentPage}`
     );
     const data = await response.json();
     setSearchResults(data.totalResults);

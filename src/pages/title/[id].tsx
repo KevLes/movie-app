@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import styles from "../../styles/modules/MovieSinglePage.module.css";
 import Image from "next/image";
+import Head from "next/head";
 
 interface MovieInfoProps {
   imdbID: string;
@@ -43,7 +44,11 @@ const MovieInfoPage = () => {
   };
 
   return (
-    movieInfo && (
+    <>
+    <Head>
+    <title>{!movieInfo ? "Movie Search App" : movieInfo.Title}</title>
+    </Head>
+    {movieInfo && (
       <div>
         <div className={styles.movieDetailsWrapper}>
           {movieInfo.Poster !== "N/A" && (
@@ -90,7 +95,8 @@ const MovieInfoPage = () => {
           </div>
         </div>
       </div>
-    )
+    )}
+    </>
   );
 };
 
